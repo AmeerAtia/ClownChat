@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace ClownChat.Api.Database;
+namespace ClownChat.Api.Data;
 
 public record ChatMember
 {

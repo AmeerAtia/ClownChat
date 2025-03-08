@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ClownChat.Api.Database;
+namespace ClownChat.Api.Data;
 
 public record Message
 {

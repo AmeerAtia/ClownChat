@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace ClownChat.Api.Database;
+namespace ClownChat.Api.Data;
 
 public class ApiDbContext : DbContext
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Net.Http.Headers;
 
-namespace ClownChat.Api.Database;
+namespace ClownChat.Api.Data;
 
 public record User
 {
