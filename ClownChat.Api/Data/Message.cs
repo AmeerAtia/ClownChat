@@ -8,10 +8,10 @@ public record Message
     public int Id;
     
     [Required]
-    public required int Sender;
+    public required User UserId;
     
     [Required]
-    public required int ChatRoomId;
+    public required ChatRoom ChatRoomId;
     
     [Required]
     public required DateTime Date;

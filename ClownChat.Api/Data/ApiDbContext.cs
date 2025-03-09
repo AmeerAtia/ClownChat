@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace ClownChat.Api.Data;
 
@@ -66,23 +65,23 @@ public class ApiDbContext : DbContext
         // Configure Friendship (composite key)
         modelBuilder.Entity<Friendship>(entity =>
         {
-            entity.Property<int>("XUserId");
-            entity.Property<int>("YUserId");
+            entity.Property<int>("User1");
+            entity.Property<int>("User2");
             entity.Property<int>("ChatId");
             
-            entity.HasKey("XUserId", "YUserId");
+            entity.HasKey("User1", "User2");
             
-            entity.HasOne(f => f.XUser)
+            entity.HasOne(f => f.User1)
                 .WithMany(u => u.Friendships)
-                .HasForeignKey("XUserId")
+                .HasForeignKey("User")
                 .OnDelete(DeleteBehavior.Restrict);
             
-            entity.HasOne(f => f.YUser)
+            entity.HasOne(f => f.User2)
                 .WithMany()
                 .HasForeignKey("YUserId")
                 .OnDelete(DeleteBehavior.Restrict);
             
-            entity.HasOne(f => f.Chat)
+            entity.HasOne(f => f.ChatId)
                 .WithMany()
                 .HasForeignKey("ChatId");
         });
@@ -90,24 +89,38 @@ public class ApiDbContext : DbContext
         // Configure Message
         modelBuilder.Entity<Message>(entity =>
         {
-            entity.Property<int>("Id").HasField("Id");
+            entity.Property<int>("Id")
+                .HasField("Id")
+                .ValueGeneratedOnAdd();
             entity.HasKey("Id");
             
-            entity.Property<int>("SenderId");
-            entity.Property<DateTime>("Date").HasField("Date");
-            entity.Property<string>("Content").HasField("Content");
+            entity.Property<int>("UserId")
+                .HasField("UserId");
+
+            entity.Property<int>("ChatRoomId")
+                .HasField("ChatRoomId");
+
+            entity.Property<DateTime>("Date")
+                .HasField("Date");
+
+            entity.Property<string>("Content")
+                .HasField("Content");
             
-            entity.HasOne(m => m.Sender)
+            entity.HasOne(m => m.UserId)
                 .WithMany()
-                .HasForeignKey("SenderId");
+                .HasForeignKey("UserId");
+            
+            entity.HasOne(m => m.ChatRoomId)
+                .WithMany()
+                .HasForeignKey("ChatRoomId");
         });
 
         // Configure User
         modelBuilder.Entity<User>(entity =>
         {
             entity.Property<int>("Id")
-            .HasField("Id")
-            .ValueGeneratedOnAdd();
+                .HasField("Id")
+                .ValueGeneratedOnAdd();
             entity.HasKey("Id");
             
             entity.Property<string>("Name")
@@ -118,7 +131,7 @@ public class ApiDbContext : DbContext
                 .HasField("Email")
                 .HasMaxLength(40);
             
-            entity.Property<string>("Password")
+            entity.Property<string>("PasswordHash")
                 .HasField("Password")
                 .HasMaxLength(100);
             
