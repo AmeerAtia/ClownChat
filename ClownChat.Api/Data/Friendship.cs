@@ -13,21 +13,3 @@ public record Friendship
     [Required]
     public required ChatRoom Chat;
 }
-
-public class FriendshipService
-{
-    public static Friendship create(User xUser, User yUser)
-    {
-        var friendship = new Friendship() {
-            XUser = xUser,
-            YUser = yUser,
-            Date = DateTime.Now,
-            Chat = new ChatRoom() {
-                
-            }
-        };
-        xUser.Friendships.Add(friendship);
-        yUser.Friendships.Add(friendship);
-        return friendship;
-    }
-}

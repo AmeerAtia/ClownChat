@@ -6,6 +6,13 @@ public class ChatRoom
 {
     [Key]
     public int Id;
-    public required ICollection<ChatMember> Members = new List<ChatMember>();
-    public required ICollection<Message> Messages = new List<Message>();
+
+    [Required]
+    public required string Name;
+    
+    [Required]
+    public required DateTime CreatedAt;
+
+    [Required]
+    public required User CreatorId;
 }

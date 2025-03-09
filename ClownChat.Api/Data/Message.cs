@@ -18,7 +18,10 @@ public record Message
     public required User Sender;
     
     [Required]
-    public DateTime Date;
+    public required ChatRoom ChatRoomId;
+    
+    [Required]
+    public required DateTime Date;
 
     [Required]
     [StringLength(10000)]

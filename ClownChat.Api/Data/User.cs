@@ -11,7 +11,19 @@ public record User
     [Required]
     [StringLength(15)]
     [RegularExpression(@"^[a-zA-Z0-9_\. ]+$")]
-    public string Name = string.Empty;
+    public required string Name;
 
-    public ICollection<Friendship> Friendships = new HashSet<Friendship>();
+    [Required]
+    [StringLength(40)]
+    public required string Email;
+
+    [Required]
+    [StringLength(150)]
+    public required string PasswordHash;
+
+    [Required]
+    public required DateTime CreatedDate;
+
+    [Required]
+    public required DateTime LastLoginDate;
 }

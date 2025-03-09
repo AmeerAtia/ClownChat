@@ -4,8 +4,8 @@ namespace ClownChat.Api.Data;
 
 public record ChatMember
 {
-    public required ChatRoom ChatRoom;
-    public required User User;
+    public required ChatRoom ChatRoomId;
+    public required User UserId;
     public required ChatPermission Role;
     public required DateTime JoinDate;
 }
@@ -16,18 +16,4 @@ public enum ChatPermission
     Admin,
     Member,
     Disabled
-}
-
-public class ChatMemberService
-{
-    public ChatMember create(User x, ChatRoom C)
-    {
-        var chatRoomMember = new ChatMember() {
-            User = x,
-            ChatRoom = C,
-            Role = ChatPermission.Member,
-            JoinDate = DateTime.Now
-        };
-        return chatRoomMember;
-    }
 }
