@@ -11,8 +11,5 @@ public class ChatRoom
     public required string Name;
 
     [Required]
-    public required User CreatorId;
-    
-    [Required]
-    public required DateTime CreatedAt;
+    public required string About;
 }

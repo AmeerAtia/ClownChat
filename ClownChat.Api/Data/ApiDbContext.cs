@@ -5,8 +5,8 @@ namespace ClownChat.Api.Data;
 public class ApiDbContext : DbContext
 {
     public DbSet<ChatRoom> ChatRooms => Set<ChatRoom>();
-    public DbSet<ChatMember> ChatMembers => Set<ChatMember>();
-    public DbSet<Friendship> Friendships => Set<Friendship>();
+    public DbSet<GroupMember> ChatMembers => Set<GroupMember>();
+    public DbSet<Relation> Friendships => Set<Relation>();
     public DbSet<Message> Messages => Set<Message>();
     public DbSet<User> Users => Set<User>();
 
@@ -25,8 +25,8 @@ public class ApiDbContext : DbContext
     }
 
     public void AddChatRoom(ChatRoom room) => ChatRooms.Add(room);
-    public void AddChatMember(ChatMember member) => ChatMembers.Add(member);
-    public void AddFriendship(Friendship friendship) => Friendships.Add(friendship);
+    public void AddChatMember(GroupMember member) => ChatMembers.Add(member);
+    public void AddFriendship(Relation friendship) => Friendships.Add(friendship);
     public void AddMessage(Message message) => Messages.Add(message);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,7 +45,7 @@ public class ApiDbContext : DbContext
         });
 
         // Configure ChatMember (composite key)
-        modelBuilder.Entity<ChatMember>(entity =>
+        modelBuilder.Entity<GroupMember>(entity =>
         {
             // Configure shadow properties for foreign keys
             entity.Property<int>("ChatRoomId");
@@ -63,7 +63,7 @@ public class ApiDbContext : DbContext
         });
 
         // Configure Friendship (composite key)
-        modelBuilder.Entity<Friendship>(entity =>
+        modelBuilder.Entity<Relation>(entity =>
         {
             entity.Property<int>("User1");
             entity.Property<int>("User2");
@@ -72,13 +72,13 @@ public class ApiDbContext : DbContext
             entity.HasKey("User1", "User2");
             
             entity.HasOne(f => f.User1)
-                .WithMany(u => u.Friendships)
+                .WithMany()
                 .HasForeignKey("User")
                 .OnDelete(DeleteBehavior.Restrict);
             
             entity.HasOne(f => f.User2)
                 .WithMany()
-                .HasForeignKey("YUserId")
+                .HasForeignKey("User")
                 .OnDelete(DeleteBehavior.Restrict);
             
             entity.HasOne(f => f.ChatId)

@@ -14,6 +14,9 @@ public record Message
     public required ChatRoom ChatRoomId;
     
     [Required]
+    public required Message? RepliedTo;
+    
+    [Required]
     public required DateTime Date;
 
     [Required]
