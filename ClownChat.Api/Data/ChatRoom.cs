@@ -9,10 +9,10 @@ public class ChatRoom
 
     [Required]
     public required string Name;
+
+    [Required]
+    public required int CreatorId;
     
     [Required]
     public required DateTime CreatedAt;
-
-    [Required]
-    public required User CreatorId;
 }

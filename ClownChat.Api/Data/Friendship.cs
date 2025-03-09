@@ -5,11 +5,11 @@ namespace ClownChat.Api.Data;
 public record Friendship
 {
     [Required]
-    public required User XUser;
+    public required int User1;
     [Required]
-    public required User YUser;
+    public required int User2;
     [Required]
     public required DateTime Date;
     [Required]
-    public required ChatRoom Chat;
+    public required int ChatId;
 }

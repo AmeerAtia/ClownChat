@@ -4,8 +4,8 @@ namespace ClownChat.Api.Data;
 
 public record ChatMember
 {
-    public required ChatRoom ChatRoomId;
-    public required User UserId;
+    public required int UserId;
+    public required int ChatRoomId;
     public required ChatPermission Role;
     public required DateTime JoinDate;
 }
