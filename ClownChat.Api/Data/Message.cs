@@ -1,8 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ClownChat.Api.Data;
 
-public record Message
+public class Message
 {
     [Key]
     public int Id;
@@ -11,7 +9,7 @@ public record Message
     public required User UserId;
     
     [Required]
-    public required ChatRoom ChatRoomId;
+    public required Room ChatRoomId;
     
     [Required]
     public required Message? RepliedTo;

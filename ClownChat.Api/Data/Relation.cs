@@ -1,19 +1,24 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ClownChat.Api.Data;
 
-public record Relation
+public class Relation
 {
+    [Key]
+    public int Id;
+
     [Required]
-    public required RelationType[] Type;
-    [Required]
-    public required User User1Id;
-    [Required]
-    public required User User2Id;
+    public required RelationType Type;
+
     [Required]
     public required DateTime Date;
+
     [Required]
-    public required ChatRoom ChatId;
+    public required User User1Id;
+
+    [Required]
+    public required User User2Id;
+
+    [Required]
+    public required Room ChatId;
 }
 
 public enum RelationType: byte

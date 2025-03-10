@@ -1,10 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace ClownChat.Api.Data;
 
 public class ApiDbContext : DbContext
 {
-    public DbSet<ChatRoom> ChatRooms => Set<ChatRoom>();
+    public DbSet<Room> ChatRooms => Set<Room>();
     public DbSet<GroupMember> ChatMembers => Set<GroupMember>();
     public DbSet<Relation> Friendships => Set<Relation>();
     public DbSet<Message> Messages => Set<Message>();
@@ -24,7 +22,7 @@ public class ApiDbContext : DbContext
         return user;
     }
 
-    public void AddChatRoom(ChatRoom room) => ChatRooms.Add(room);
+    public void AddChatRoom(Room room) => ChatRooms.Add(room);
     public void AddChatMember(GroupMember member) => ChatMembers.Add(member);
     public void AddFriendship(Relation friendship) => Friendships.Add(friendship);
     public void AddMessage(Message message) => Messages.Add(message);
@@ -38,7 +36,7 @@ public class ApiDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configure ChatRoom
-        modelBuilder.Entity<ChatRoom>(entity =>
+        modelBuilder.Entity<Room>(entity =>
         {
             entity.Property<int>("Id").HasField("Id");
             entity.HasKey("Id");

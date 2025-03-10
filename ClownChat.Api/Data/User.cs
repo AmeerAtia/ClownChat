@@ -1,9 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.Net.Http.Headers;
-
 namespace ClownChat.Api.Data;
 
-public record User
+public class User
 {
     [Key]
     public int Id;
